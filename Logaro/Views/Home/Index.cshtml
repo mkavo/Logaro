@@ -1,0 +1,27 @@
+﻿@using Logaro.Models;
+@model IEnumerable<WebApplication>
+
+
+<h2>Choose application</h2>
+
+<div> --------------------------------------</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        
+
+        <div class="editor-label">
+            @*@Html.LabelFor(m => m.)*@
+        </div>
+
+      <div class="editor-field">
+          @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>, " Välj App ")
+          @*@Html.ValidationMessageFor(model => model.)*@
+          <input id="app1" type="submit" value="Switch To" />
+      </div>
+    </fieldset>
+}
