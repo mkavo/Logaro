@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc
-@model  PagedList.IPagedList<Logaro.Models.Logaro>
+@model PagedList.IPagedList<Logaro.Models.Logaro>
 
 <!DOCTYPE html>
 
@@ -34,9 +34,9 @@
                     <td style="vertical-align: text-top; max-width: 80px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Date</td>
                     <td style="vertical-align: text-top; border-right: solid 1px #f00; text-align: center; padding-left: 2px">@Model[i].Thread</td>
                     <td style="vertical-align: text-top; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Level</td>
-                    <td style="vertical-align: text-top; max-width: 100px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
-                    <td style="vertical-align: text-top; max-width: 700px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
-                    <td style="vertical-align: text-top; max-width: 500px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
+                    <td style="vertical-align: text-top; max-width: 150px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
+                    <td style="vertical-align: text-top; max-width: 200px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
+                    <td style="vertical-align: text-top; max-width: 550px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
                 </tr>
             }
         </table>
@@ -47,10 +47,9 @@
             <p></p>
             <div class="pagination" style="margin-left: 400px">
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToLog", new { page, ViewBag.tableName }))
+                of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToFilteredLog", new { page, ViewBag.day, ViewBag.tableName }))
             </div>
         </div>
     }
-
 </body>
 </html>

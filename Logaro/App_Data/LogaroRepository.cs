@@ -65,15 +65,21 @@ namespace Logaro.App_Data
 
         public List<Models.Logaro> logaroListBind(string tablename)
         {
-            if (tablename == null)
-            {
-                tablename = "Viola_Log";
-                
-            }
-            var db = new Database("DevtestSQLServerDatabase");
-            var query =  db.Query<Models.Logaro>("SELECT * FROM " + tablename + " Order By Id"); 
-            var result = query;
+                var db = new Database("DevtestSQLServerDatabase");
+                var query = db.Query<Models.Logaro>("SELECT * FROM " + tablename + " Order By Id");
+                var result = query;
+                return result.ToList();         
+        }
 
+        public List<Models.Logaro> LogaroList(string day, string tableName)
+        {
+
+            //var da = DateTime.Parse(day);
+            //var dag = DateTime.Parse(day).ToShortDateString();
+            
+            var db = new Database("DevtestSQLServerDatabase");
+            var query = db.Query<Models.Logaro>("SELECT  Date, id ,Thread ,level, Logger ,Message, Exception  FROM " + tableName + " Where Convert(DATE,Date) LIKE " + "("+"'" + day + "%" + "'" + ")" + " Order By Id");
+            var result = query;
             return result.ToList();
         }
 
@@ -92,6 +98,18 @@ namespace Logaro.App_Data
             var result = query;
             return result;
         }
+
+        
+        public IEnumerable<Models.Logaro> LogaroListFreeText (string text, string tableName)
+        {
+            var db = new Database("DevtestSQLServerDatabase");
+            const string S = "Select * From ";
+            string v = S + tableName;
+            var query = db.Fetch<Models.Logaro>(v + " Where Level ='Error' And Message like '%" +text + "%'" + " Order By Id");
+            var result = query;
+            return result;
+        }
+
         public void Update(Models.Logaro objectToUpdate, IUnitOfWork uow)
         {
             throw new NotImplementedException();

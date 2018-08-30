@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Logaro.Models.WebApplication>
+
+
+
+@{ var TableName = ViewBag.tableName;}
+
+@using (Html.BeginForm("FilteredLog", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.DropDownList("TimeFilter", ViewData["ddlName"] as IEnumerable<SelectListItem>)
+
+    <input id="SendDate" name="Send Date" type="submit" value="Send date and time" />
+    <input id="TableName" name="TableName" type="hidden" value="@ViewBag.tableName" />
+}
+

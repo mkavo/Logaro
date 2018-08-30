@@ -1,0 +1,60 @@
+﻿@using Logaro.Models;
+@model IEnumerable<WebApplication>
+
+@{
+    ViewBag.Title = "Filter Logar";
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <title>Filtered Log</title>
+</head>
+<body>
+
+    <div style=" background-color: hotpink"><h2 align="center">@ViewData["AppName"] Filtered Log</h2></div>
+
+
+    <h4 align="left">Choose Web Application!</h4>
+
+    <div id="radiobut">
+        <p>@Html.RadioButton("TableName", "Viola_Log") &nbsp;<label>Viola</label>&nbsp;</p>
+        <p>@Html.RadioButton("TableName", "Knut_Log") &nbsp;<label>Knut</label>&nbsp;</p>
+        <p>@Html.RadioButton("TableName", "VService_Log")&nbsp;<label>ViolaService</label>&nbsp;</p>
+        <div id="DynamicDropDownList"></div>
+        <br />
+        <div style="color:crimson">
+            @TempData["Message2"]
+        </div>
+    </div>
+
+
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+                listenRadioIdClick();
+                //check first on load
+                //$("input[name ='TableName']:first").trigger('click');
+
+            });
+
+    function listenRadioIdClick() {
+                var ddlProbeUrl = '@Url.Action("DropDownPartial")';
+                $('input[name ="TableName"]').click(function () {
+                    var id = $(this).val();
+                    //perform ajax request
+                    $.get(ddlProbeUrl, { TableName: id }, function (data) {
+                        $("#DynamicDropDownList").empty().html(data);
+                    });
+                });
+            }
+</script>
+
+

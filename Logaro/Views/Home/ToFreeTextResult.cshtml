@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc
-@model  PagedList.IPagedList<Logaro.Models.Logaro>
+@model PagedList.IPagedList<Logaro.Models.Logaro>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,7 @@
     <!--Result table-->
     @using (Html.BeginForm())
     {
-        <div style="background-color: hotpink"><h2 align="center">@ViewData["AppName"] Details</h2></div>
+        <div style="background-color: hotpink"><h2 align="center">@ViewData["AppName"] Free Text Result</h2></div>
 
         <table width="1285" border="1">
 
@@ -47,7 +47,7 @@
             <p></p>
             <div class="pagination" style="margin-left: 400px">
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToLog", new { page, ViewBag.tableName }))
+                of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToFreeTextResult", new { page, ViewBag.tableName }))
             </div>
         </div>
     }

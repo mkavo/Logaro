@@ -1,0 +1,41 @@
+﻿@*@model Logaro.Models.Logaro*@
+@using Logaro.Models;
+@model IEnumerable<WebApplication>
+
+@*@{
+        Layout = null;
+    }*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @*<meta name="viewport" content="width=device-width" />*@
+    <title>Free Search</title>
+</head>
+<body>
+    <div>
+        <div style=" background-color: hotpink"><h2 align="center">@ViewData["AppName"] Free Text</h2></div>
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+        <div class="editor-field">
+            <div> <h4 align="left">Choose Web Application!</h4></div>
+            @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>)<br /><br />
+            <br />
+            @Html.TextBox("FreeText", "Write your Text Here:", new { @class = "form-control" })<br /><br />
+            <input id="app1" type="submit" value="Send Text" />
+        </div>
+            <br />
+            <div style="color:crimson">
+                @TempData["Message3"] <br />
+                @TempData["Message4"]
+            </div>
+        }
+    </div>
+    
+</body>
+</html>
