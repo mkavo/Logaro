@@ -104,6 +104,10 @@ namespace Logaro.Controllers
             { tb = 2; }
             if (tableName == "VService_Log")
             { tb = 3; }
+            if (tableName == "ViolaDev_Log")
+            { tb = 4; }
+            if (tableName == "KnutDev_Log")
+            { tb = 5; }
 
             var tn = LogaroRepository.Instance.TableName(tb);
             tableName = tn.Select(m => m.TableName).FirstOrDefault();
@@ -184,6 +188,12 @@ namespace Logaro.Controllers
                     break;
                 case 3:
                     tableName = "VService_Log";
+                    break;
+                case 4:
+                    tableName = "ViolaDev_Log";
+                    break;
+                case 5:
+                    tableName = "KnutDev_Log";
                     break;
                 default:
                     return DropDownPartial(tableName); //to default                    
