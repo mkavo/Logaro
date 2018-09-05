@@ -29,6 +29,7 @@ bld/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 logaro/web.config
+logaro/log4net.config
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
