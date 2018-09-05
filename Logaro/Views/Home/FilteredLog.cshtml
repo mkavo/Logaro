@@ -1,9 +1,6 @@
 ﻿@using Logaro.Models;
 @model IEnumerable<WebApplication>
 
-@{
-    ViewBag.Title = "Filter Logar";
-}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -27,6 +24,8 @@
         <p>@Html.RadioButton("TableName", "Viola_Log") &nbsp;<label>Viola</label>&nbsp;</p>
         <p>@Html.RadioButton("TableName", "Knut_Log") &nbsp;<label>Knut</label>&nbsp;</p>
         <p>@Html.RadioButton("TableName", "VService_Log")&nbsp;<label>ViolaService</label>&nbsp;</p>
+        <p>@Html.RadioButton("TableName", "ViolaDev_Log") &nbsp;<label>Viola Devlopment</label>&nbsp;</p>
+        <p>@Html.RadioButton("TableName", "KnutDev_Log")&nbsp;<label>Knut Development</label>&nbsp;</p>
         <div id="DynamicDropDownList"></div>
         <br />
         <div style="color:crimson">
