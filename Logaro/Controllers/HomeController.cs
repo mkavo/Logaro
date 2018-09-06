@@ -30,6 +30,7 @@ namespace Logaro.Controllers
             selectList.Insert(0, new SelectListItem{ Value = "0", Text = "Choose Web-App" , Selected = true});
             ViewData["LogList"] = selectList;
             Logger.Debug("message:Här kommer testet!");
+            LogManager.Flush(1);
             
             return  View(); 
         }
