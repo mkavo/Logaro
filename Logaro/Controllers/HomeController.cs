@@ -18,21 +18,32 @@ namespace Logaro.Controllers
     public class HomeController : Controller
     {
         private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        [HttpGet]
-        public  ActionResult Log()
-        {
-            IEnumerable<WebApplication> apps = LogaroRepository.Instance.AppsConfig();
-            int selectedStateId = 0;
-            // Do this if you don't care about selection
-            //List<SelectListItem> selectList = apps.Select(state => new SelectListItem {Value = selectList..ToString(), Text = state.Name}).ToList();
 
-            List<SelectListItem> selectList = apps.Select(app => new SelectListItem { Value = app.ApplicationId.ToString(), Text = app.ApplicationName, Selected = (app.ApplicationId == selectedStateId) }).OrderBy(app => app.Text).ToList();
-            selectList.Insert(0, new SelectListItem{ Value = "0", Text = "Choose Web-App" , Selected = true});
-            ViewData["LogList"] = selectList;
-            Logger.Debug("message:Här kommer testet!");
-            LogManager.Flush(1);
-            
-            return  View(); 
+        [HttpGet]
+        public ActionResult Log()
+        {
+            try
+            {
+                IEnumerable<WebApplication> apps = LogaroRepository.Instance.AppsConfig();
+                int selectedStateId = 0;
+                // Do this if you don't care about selection
+                //List<SelectListItem> selectList = apps.Select(state => new SelectListItem {Value = selectList..ToString(), Text = state.Name}).ToList();
+
+                List<SelectListItem> selectList = apps.Select(app => new SelectListItem
+                {
+                    Value = app.ApplicationId.ToString(),
+                    Text = app.ApplicationName,
+                    Selected = (app.ApplicationId == selectedStateId)
+                }).OrderBy(app => app.Text).ToList();
+                selectList.Insert(0, new SelectListItem {Value = "0", Text = "Choose Web-App", Selected = true});
+                ViewData["LogList"] = selectList;
+            }
+            catch (Exception e)
+            {
+                Logger.Debug("message:Log file crash!");
+                LogManager.Flush(1);
+            }
+        return View(); 
         }
 
         [HttpPost]
@@ -40,20 +51,25 @@ namespace Logaro.Controllers
         {
             string appId = form["WebApplication"];
             string item = form["app1"];
-            
-            if (appId == "0")
+            var tablename = "";
+            try
             {
-                TempData["Message"] = "Choose Web-app";
-               return RedirectToAction("Log");
+                if (appId == "0")
+                {
+                    TempData["Message"] = "Choose Web-app";
+                    return RedirectToAction("Log");
+                }
+               
+                    var tn = LogaroRepository.Instance.TableName(int.Parse(appId));
+                    tablename = tn.Select(m => m.TableName).FirstOrDefault();
+                    
             }
-            else
+            catch (Exception e)
             {
-                var tablename = "";
-                var tn = LogaroRepository.Instance.TableName(int.Parse(appId));
-                tablename = tn.Select(m => m.TableName).FirstOrDefault();
-                Logger.Error(tablename);
-                return RedirectToAction("ToLog", new { tableName = tablename });
+                Logger.Error("webbapplikations fel!");
+                Logger.Debug(e.Message);
             }
+            return RedirectToAction("ToLog", new { tableName = tablename });
         }
 
 

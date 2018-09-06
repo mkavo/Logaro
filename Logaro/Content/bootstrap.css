@@ -4518,7 +4518,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #f9f6f6;
+  color: #ffffff;
+  Font-Size: 20px;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
