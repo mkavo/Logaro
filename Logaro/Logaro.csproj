@@ -174,7 +174,6 @@
     </Compile>
     <Compile Include="log\LogHelper.cs" />
     <Compile Include="Models\WebApplication.cs" />
-    <Compile Include="Models\BL.cs" />
     <Compile Include="Models\Logaro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

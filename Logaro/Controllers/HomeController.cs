@@ -10,7 +10,7 @@ using Logaro.App_Data;
 using Logaro.Models;
 using Microsoft.Ajax.Utilities;
 using PagedList;
-using Logaro = Logaro.Models.Logaro;
+// using Logaro = Logaro.Models.Logaro;
 
 
 namespace Logaro.Controllers
@@ -29,6 +29,7 @@ namespace Logaro.Controllers
             List<SelectListItem> selectList = apps.Select(app => new SelectListItem { Value = app.ApplicationId.ToString(), Text = app.ApplicationName, Selected = (app.ApplicationId == selectedStateId) }).OrderBy(app => app.Text).ToList();
             selectList.Insert(0, new SelectListItem{ Value = "0", Text = "Choose Web-App" , Selected = true});
             ViewData["LogList"] = selectList;
+            Logger.Debug("message:Här kommer testet!");
             
             return  View(); 
         }
@@ -49,6 +50,7 @@ namespace Logaro.Controllers
                 var tablename = "";
                 var tn = LogaroRepository.Instance.TableName(int.Parse(appId));
                 tablename = tn.Select(m => m.TableName).FirstOrDefault();
+                Logger.Error(tablename);
                 return RedirectToAction("ToLog", new { tableName = tablename });
             }
         }
