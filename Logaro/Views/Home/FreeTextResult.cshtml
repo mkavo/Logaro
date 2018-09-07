@@ -21,7 +21,9 @@
 
         <div class="editor-field">
             <div> <h4 align="left">Choose Web Application!</h4></div>
-            @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>)<br /><br />
+            @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>, htmlAttributes: new { style = "width:200px;height:30px" })
+            <br />
+            <br />
             <br />
             @Html.TextBox("FreeText", "Write your Text Here:", new { @class = "form-control" })<br /><br />
             <input id="app1" type="submit" value="Send Text" />

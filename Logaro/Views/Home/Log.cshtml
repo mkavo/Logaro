@@ -11,26 +11,28 @@
 
     <div>
         <div style=" background-color: hotpink"><h2 align="center">@ViewData["AppName"] Web Application Log</h2></div>
-       
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-  
-        <div class="editor-field">
-            <h4 align="left">Choose Web Application!</h4>
-            
-            @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>)
 
-            @*@Html.ValidationMessageFor( == "Choose App", "Fel val")*@<br /><br />
-            <input id="app1" type="submit" value="Run" />
-        </div>
-                <br />
-                <div style="color:crimson">
-                    @TempData["Message"]
+            <h4 align="left">Choose Web Application!</h4>
+            <div class="editor-field">
+
+                <div style="width: 150px;">
+                    @Html.DropDownList("WebApplication", ViewData["LogList"] as IEnumerable<SelectListItem>, htmlAttributes: new { style = "width:200px;height:30px" })
+                    
                 </div>
-            
+                <br /><br />
+                <input id="app1" type="submit" value="Run" />
+            </div>
+            <br />
+            <div style="color:crimson">
+                @TempData["Message"]
+            </div>
+
         }
-        </div>
+    </div>
 </body>
 </html>
