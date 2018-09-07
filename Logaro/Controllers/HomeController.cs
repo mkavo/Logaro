@@ -10,7 +10,7 @@ using Logaro.App_Data;
 using Logaro.Models;
 using Microsoft.Ajax.Utilities;
 using PagedList;
-// using Logaro = Logaro.Models.Logaro;
+
 
 
 namespace Logaro.Controllers
