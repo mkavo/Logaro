@@ -6,51 +6,52 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/PagedList.css" rel="stylesheet" />
     <title>Log Details</title>
 </head>
 <body>
 
-    <!--Result table-->
-    @using (Html.BeginForm())
-    {
-        <div style="background-color: hotpink"><h2 align="center">@ViewData["AppName"] Free Text Result</h2></div>
+<!--Result table-->
+@using (Html.BeginForm())
+{
+    <div style="background-color: hotpink" ><h2 align="center">@ViewData["AppName"] Free Text Result</h2></div>
+    <table class="table-bordered">
+        <tr>
+            <th style="text-align: left">@Html.Label("Log ID")</th>
+            <th style="text-align: left">@Html.Label("Date")</th>
+            <th style="text-align: left">@Html.Label("Thread")</th>
+            <th style="text-align: left">@Html.Label("Level")</th>
+            <th style="text-align: left">@Html.Label("Logger")</th>
+            <th style="text-align: left">@Html.Label("Message")</th>
+            <th style="text-align: left">@Html.Label("Exception")</th>
+        </tr>
 
-        <table width="1285" border="1">
-
-            <tr>
-                <th style="text-align: left">@Html.Label("Log ID")</th>
-                <th style="text-align: left">@Html.Label("Date")</th>
-                <th style="text-align: left">@Html.Label("Thread")</th>
-                <th style="text-align: left">@Html.Label("Level")</th>
-                <th style="text-align: left">@Html.Label("Logger")</th>
-                <th style="text-align: left">@Html.Label("Message")</th>
-                <th style="text-align: left">@Html.Label("Exception")</th>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr style="white-space: pre-wrap; word-wrap: break-word">
+                <td style="vertical-align: text-top; max-width: 50px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Id</td>
+                <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Date</td>
+                <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Thread</td>
+                <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Level</td>
+                <td style="vertical-align: text-top; max-width: 100px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
+                <td style="vertical-align: text-top; max-width: 700px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
+                <td style="vertical-align: text-top; max-width: 700px; border-left: solid 1px #f00; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
             </tr>
+        }
+    </table>
 
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr style="white-space: pre-wrap; word-wrap: break-word">
-                    <td style="vertical-align: text-top; max-width: 50px; border-left: solid 1px #f00; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Id</td>
-                    <td style="vertical-align: text-top; max-width: 80px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Date</td>
-                    <td style="vertical-align: text-top; border-right: solid 1px #f00; text-align: center; padding-left: 2px">@Model[i].Thread</td>
-                    <td style="vertical-align: text-top; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Level</td>
-                    <td style="vertical-align: text-top; max-width: 100px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
-                    <td style="vertical-align: text-top; max-width: 700px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
-                    <td style="vertical-align: text-top; max-width: 500px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
-                </tr>
-            }
-        </table>
-
-        <!--Paging-->
-        <div id="container" style="margin-left: 20px">
-            <p></p>
-            <p></p>
-            <div class="pagination" style="margin-left: 400px">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToFreeTextResult", new { page, ViewBag.tableName }))
-            </div>
+    <!--Paging-->
+    <div id="container"class="container" style="text-align: center">
+        <p></p>
+        <p></p>
+        <div class="modal-4 " style="width: auto">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToFreeTextResult", new { page, ViewBag.tableName }))
         </div>
-    }
+    </div>
+}
 
 </body>
 </html>
+

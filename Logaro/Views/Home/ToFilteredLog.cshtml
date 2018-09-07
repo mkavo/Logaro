@@ -6,6 +6,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/PagedList.css" rel="stylesheet" />
     <title>Log Details</title>
 </head>
 <body>
@@ -15,7 +17,7 @@
     {
         <div style="background-color: hotpink"><h2 align="center">@ViewData["AppName"] Details</h2></div>
 
-        <table width="1285" border="1">
+        <table class="table-bordered">
 
             <tr>
                 <th style="text-align: left">@Html.Label("Log ID")</th>
@@ -30,22 +32,22 @@
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr style="white-space: pre-wrap; word-wrap: break-word">
-                    <td style="vertical-align: text-top; max-width: 50px; border-left: solid 1px #f00; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Id</td>
-                    <td style="vertical-align: text-top; max-width: 80px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Date</td>
-                    <td style="vertical-align: text-top; border-right: solid 1px #f00; text-align: center; padding-left: 2px">@Model[i].Thread</td>
-                    <td style="vertical-align: text-top; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Level</td>
-                    <td style="vertical-align: text-top; max-width: 150px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
-                    <td style="vertical-align: text-top; max-width: 200px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
-                    <td style="vertical-align: text-top; max-width: 550px; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
+                    <td style="vertical-align: text-top; max-width: 50px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Id</td>
+                    <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Date</td>
+                    <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Thread</td>
+                    <td style="vertical-align: text-top; max-width: 80px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Level</td>
+                    <td style="vertical-align: text-top; max-width: 100px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Logger</td>
+                    <td style="vertical-align: text-top; max-width: 700px; border-left: solid 1px #f00; padding-left: 2px">@Model[i].Message</td>
+                    <td style="vertical-align: text-top; max-width: 700px; border-left: solid 1px #f00; border-right: solid 1px #f00; padding-left: 2px">@Model[i].Exception</td>
                 </tr>
             }
         </table>
 
         <!--Paging-->
-        <div id="container" style="margin-left: 20px">
+        <div  id="container" class="container" style="text-align: center">
             <p></p>
             <p></p>
-            <div class="pagination" style="margin-left: 400px">
+            <div class="modal-4 " style="width: auto">
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
                 of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("/ToFilteredLog", new { page, ViewBag.day, ViewBag.tableName }))
             </div>

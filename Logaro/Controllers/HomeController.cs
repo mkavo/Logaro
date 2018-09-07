@@ -28,7 +28,6 @@ namespace Logaro.Controllers
                 int selectedStateId = 0;
                 // Do this if you don't care about selection
                 //List<SelectListItem> selectList = apps.Select(state => new SelectListItem {Value = selectList..ToString(), Text = state.Name}).ToList();
-
                 List<SelectListItem> selectList = apps.Select(app => new SelectListItem
                 {
                     Value = app.ApplicationId.ToString(),
@@ -98,7 +97,6 @@ namespace Logaro.Controllers
         }
 
         [HttpPost]
-
         public ActionResult FilteredLog(FormCollection form)
         {
             
@@ -154,16 +152,16 @@ namespace Logaro.Controllers
         }
         
         [HttpGet]
-        public PartialViewResult DropDownPartial(string TableName)
+        public PartialViewResult DropDownPartial(string tableName)
         {
             //var selectList = new SelectList(items, "Key", "Value");
-            IEnumerable<Models.Logaro> apps = LogaroRepository.Instance.logaroListBind(TableName);
+            IEnumerable<Models.Logaro> apps = LogaroRepository.Instance.logaroListBind(tableName);
             List<SelectListItem> selectList = apps.Select(app => new SelectListItem { Value = app.Date.ToShortDateString(), Text = app.Date.ToShortDateString() + "]><[" + app.Date.ToLongTimeString() }).OrderBy(app => app.Text).ToList();
             selectList.Insert(0, new SelectListItem { Value = "0", Text = "Choose Date and Time" });
             ViewData["ddlName"] = selectList; // ur dropdownlist name id
             var webApp = new WebApplication();
-            webApp.TableName = TableName;
-            ViewBag.TableName = TableName;
+            webApp.TableName = tableName;
+            ViewBag.TableName = tableName;
             return PartialView("_DropDownListHtml"); //, selectList
         }
 
@@ -181,7 +179,6 @@ namespace Logaro.Controllers
         }
 
         [HttpPost]
-
     public ActionResult FreeTextResult(FormCollection form, string text)
         {
             int tableId = Int32.Parse(form["WebApplication"]);
@@ -228,18 +225,16 @@ namespace Logaro.Controllers
 
         public ActionResult ToFreeTextResult(int? page, string freeText, string tableName)
         {
-
             int pageSize = 7;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             IPagedList<Models.Logaro> log = null;
-            
+            ViewBag.TableName = tableName;
             var objLogaroList = LogaroRepository.Instance.LogaroListFreeText(freeText, tableName);
             Models.Logaro objLogaro = new Models.Logaro();
             objLogaro.Log = objLogaroList.OrderBy(m => m.Id).ToList();
             log = objLogaroList.ToPagedList(pageIndex, pageSize);
             return View(log);
-
         }
 
         public ActionResult About()

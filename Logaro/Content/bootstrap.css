@@ -316,6 +316,8 @@ body {
   line-height: 2;
   color: #333333;
   background-color: #ffffff;
+    margin-left: 5%;
+    margin-right: 5%;
 
 }
 
@@ -1404,6 +1406,7 @@ pre code {
 
 table {
   max-width: 100%;
+  margin-left: 0px;
   background-color: transparent;
 }
 
@@ -4642,7 +4645,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #999999;
 }
 
-.pagination {
+/* .pagination {
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
@@ -4807,7 +4810,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #999999;
   cursor: not-allowed;
   background-color: #ffffff;
-}
+} */
 
 .label {
   display: inline;
